@@ -1,0 +1,36 @@
+%!
+% @ numdots=300,000 this file takes about 40 minutes on a LaserWriter Plus
+%  but the image is textbook quality at 300 dpi.
+% Feel free to send me higher dpi samples or interesting modifications.
+%  Original code from (c)? Don Lancaster in the Jul 90 Byte, page 300.
+%		Ken_Hughes@mtsg.ubc.ca   [137.82.27.1]   BITNET: usernudu@ubcmtsg
+%		Faculty of Education, University of British Columbia
+%		Vancouver, British Columbia, Canada.    V6T 1Z5 
+% /ZapfChancery-MediumItalic findfont 8 scalefont setfont
+% 240 670 moveto (fractal fern) show
+
+/problistcreate  { mark /counter 0 def probabilities 
+	{ 128 mul round cvi 
+		{ transforms counter get } repeat 
+		/counter counter 1 add def }
+	forall counttomark 128 sub neg dup 0 gt
+	{ [ 1 0 0 1 0 0 ] repeat }
+	{ pop }
+	ifelse]			% why the Ò]Ó?
+	/problist exch def } bind def
+/fern { problistcreate 1 1 20
+	{ problist rand -24 bitshift get transform
+		2 copy moveto 0.001 10 rlineto }
+	repeat newpath numdots 
+	{ problist rand -24 bitshift get transform
+		2 copy moveto 0.001 0 rlineto stroke }
+	repeat } bind def
+% demo
+/numdots 300000 def		% > value for density; < for speed
+/transforms [ [ 0 0 0 .16 0 0 ] [ .2 .23 -.26 .22 0 1.6 ]
+	[-.15 .26 .28 .24 0 .44 ] [.85 -.04 .04 .85 0 1.6 ] ] def
+/probabilities [ .01 .07 .07 .85 ] def
+1 setlinecap 0 setlinewidth
+240 280 translate -45 rotate 40 40 scale	% position & shape 
+fern 						% showpage and quit removed
+showpage

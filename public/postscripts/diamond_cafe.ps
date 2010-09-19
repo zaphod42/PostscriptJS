@@ -1,0 +1,58 @@
+%---------------- Variables ------------------ 
+/MainFont /Helvetica-Bold findfont 15 scalefont def 
+/SloganFont /Helvetica-Oblique findfont 7 scalefont def 
+/OwnerFont /Helvetica findfont 10 scalefont def 
+%---------------- Procedures ------------------- 
+/rightshow  % stk: string
+{ dup stringwidth pop %get length of string 
+  120 exch sub %calc. white space 
+  0 rmoveto %Move over that much 
+  show } def %show string
+
+/CardOutline  %Print card’s outline
+{ newpath
+  90 90 moveto 
+  0 144 rlineto 
+  252 0 rlineto 
+  0 -144 rlineto 
+  closepath
+  .5 setlinewidth
+  stroke } def 
+
+/doBorder  %Print card’s border
+{ 99 99 moveto 
+  0 126 rlineto  %Border: 126 pts high 
+  234 0 rlineto % & 234 points wide 
+  0 -126 rlineto 
+  closepath 
+  2 setlinewidth %2-point-wide line 
+  stroke } def
+
+/Diamond 
+{ newpath  %define & fill
+  207 216 moveto % a diamond-shaped
+  36 -54 rlineto % path
+  -36 -54 rlineto 
+  -36 54 rlineto
+  closepath
+  .8 setgray fill } def 
+
+/doText %Print card’s text
+{ 0 setgray 
+  90 180 moveto 
+  MainFont setfont 
+  (Diamond Cafe) rightshow 
+  90 168 moveto 
+  SloganFont setfont
+  ("The Club of Lonely Hearts") rightshow 
+  216 126 moveto 
+  OwnerFont setfont 
+  (Sam Spade) show
+  216 111 moveto
+  (Owner) show } def 
+%---------- Main Program ------------ 
+CardOutline 
+doBorder 
+Diamond 
+doText
+showpage

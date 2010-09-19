@@ -1,0 +1,12 @@
+%% p. 31: Another Box Program
+/inch {72 mul} def
+/box { newpath moveto
+1 inch 0 rlineto
+0 1 inch rlineto
+-1 inch 0 rlineto
+closepath } def
+/fillbox { setgray fill } def
+3.5 inch 4.5 inch box 0 fillbox
+3.75 inch 5 inch box .4 fillbox
+4 inch 5.5 inch box .8 fillbox
+showpage

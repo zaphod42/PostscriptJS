@@ -1,0 +1,188 @@
+%PS
+%% p. 18: A Line
+newpath 144 72 moveto 144 432 lineto stroke showpage
+%% p. 19: Two Lines
+newpath 72 360 moveto 144 72 rlineto 144 432 moveto 0 -216 rlineto stroke showpage
+%% p. 20: A Box
+newpath 270 360 moveto 0 72 rlineto 72 0 rlineto 0 -72 rlineto -72 0 rlineto 4 setlinewidth stroke showpage
+%% p. 21: A Better Box
+newpath 270 360 moveto 0 72 rlineto 72 0 rlineto 0 -72 rlineto -72 0 rlineto closepath 4 setlinewidth stroke showpage
+%% p. 22: A Filled Box
+newpath 270 360 moveto 0 72 rlineto 72 0 rlineto 0 -72 rlineto closepath fill showpage
+%% p. 22: A Gray Box
+newpath 270 360 moveto 0 72 rlineto 72 0 rlineto 0 -72 rlineto closepath .5 setgray fill showpage
+%% p. 23: Overlapping Boxes
+newpath
+252 324 moveto
+0 72 rlineto
+72 0 rlineto
+0 -72 rlineto
+closepath
+fill
+newpath
+270 360 moveto
+0 72 rlineto
+72 0 rlineto
+0 -72 rlineto
+closepath
+.4 setgray
+fill
+newpath
+288 396 moveto
+0 72 rlineto
+72 0 rlineto
+0 -72 rlineto
+closepath
+.8 setgray
+fill
+showpage
+%% Simple variable def
+/ppi 72 def newpath 144 ppi moveto 144 432 lineto stroke showpage
+%% Procedure def
+/line { 72 0 rlineto } def newpath 252 324 moveto line stroke showpage
+%% p. 30: Overlapping Boxes (with procedure)
+/box
+{ 72 0 rlineto
+0 72 rlineto
+-72 0 rlineto
+
+closepath } def
+newpath
+252 324 moveto box
+0 setgray fill
+newpath
+270 360 moveto box
+.4 setgray fill
+newpath
+288 396 moveto box
+.8 setgray fill
+showpage
+%% p. 31: Another Box Program
+/inch {72 mul} def
+/box { newpath moveto
+1 inch 0 rlineto
+0 1 inch rlineto
+-1 inch 0 rlineto
+closepath } def
+/fillbox { setgray fill } def
+3.5 inch 4.5 inch box 0 fillbox
+3.75 inch 5 inch box .4 fillbox
+4 inch 5.5 inch box .8 fillbox
+showpage
+%% p. 36: Show typography
+/Times-Roman findfont
+15 scalefont
+setfont
+72 200 moveto
+(typography) show
+showpage
+%% p.38: Show Gorilla
+/showGorilla { moveto (Gorilla) show } def
+/Times-Roman findfont 6 scalefont setfont 72 300 showGorilla
+/Times-Roman findfont 10 scalefont setfont 72 275 showGorilla
+/Times-Roman findfont 15 scalefont setfont 72 250 showGorilla
+/Times-Roman findfont 20 scalefont setfont 72 225 showGorilla
+showpage
+%% p.40: Typefaces
+/vpos 720 def /word (Typefaces) def
+/choosefont { findfont 15 scalefont setfont } def
+/newline {/vpos vpos 15 sub def 72 vpos moveto} def
+/printword { choosefont word show newline } def
+72 vpos moveto
+/Times-Roman printword /Times-Bold printword
+/Times-Italic printword /Times-BoldItalic printword newline
+/Helvetica printword /Helvetica-Bold printword
+/Helvetica-Oblique printword /Helvetica-BoldOblique printword newline
+/Courier printword /Courier-Bold printword
+/Courier-Oblique printword /Courier-BoldOblique printword newline
+/Symbol printword showpage
+
+%% p.48: Translated Squares
+/Times-Roman findfont 30 scalefont setfont
+/square
+{ newpath
+  0 0 moveto
+  90 0 lineto
+  90 90 lineto
+  0 90 lineto
+  closepath fill
+  6 92 moveto
+  (A Box) show } def
+
+square
+200 250 translate
+square
+200 250 translate
+square
+showpage
+
+%% p.49: Rotated Squares
+/Times-Roman findfont 30 scalefont setfont
+square
+300 150 translate
+60 rotate
+square
+300 150 translate
+60 rotate
+square
+showpage
+
+%% p.50: Scaled Squares
+/Times-Roman findfont 30 scalefont setfont
+square
+100 100 translate
+1.5 1.5 scale
+square
+100 100 translate
+.75 1.25 scale
+square
+showpage
+
+%% p.51: Star
+/starside
+{ 72 0 lineto
+  currentpoint translate
+  -144 rotate } def
+/star
+{ moveto
+  currentpoint translate
+  4 { starside } repeat
+  closepath
+  gsave
+      .5 setgray fill
+  grestore
+  stroke } def
+
+200 200 star
+showpage
+
+%% p.54: Arcs
+newpath 100 150 36 45 90 arc stroke showpage
+newpath 100 150 36 45 90 arcn stroke showpage
+
+newpath 300 400 54 40 140 arc stroke
+newpath 300 365 moveto 300 345 54 40 140 arc stroke showpage
+
+%% p.55: Ellipses
+/doACircle { 0 0 54 0 360 arc stroke closepath } def
+/doAnEllipse { 1 .75 scale doACircle stroke closepath } def
+300 500 translate doACircle
+4 { 0 -72 translate doAnEllipse } repeat
+showpage
+
+%% p.57: arcto
+/DrawAnX
+{ 3 3 rmoveto -6 -6 rlineto
+  0 6 rmoveto 6 -6 rlineto
+  stroke } def
+
+50 50 moveto DrawAnX
+%50 150 moveto DrawAnX
+%150 150 moveto DrawAnX
+%
+%50 50 moveto
+%50 150 150 150 36 arcto
+%4 {pop} repeat
+%stroke
+
+showpage
