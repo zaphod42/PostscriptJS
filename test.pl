@@ -89,7 +89,7 @@ websocket '/results' => sub {
     my $self = shift;
 
     my $parser = Mojo::JSON->new();
-    $self->receive_message(sub {
+    $self->on_message(sub {
         my ($self, $json) = @_;
         TAP::output($parser->decode($json));
     });
@@ -151,11 +151,11 @@ __DATA__
 @@ test.html.ep
 <html>
     <head>
-        <% my $script = {%>
+        <% my $script = begin %>
             <% for (@{ $_[0] }) { %> 
                 <script src="<%= $_ %>"></script>
             <% } %>
-        <%}%>
+        <% end %>
 
         <%== $script->($files->{jasmine}) %>
         <%== $script->($files->{public}) %>
