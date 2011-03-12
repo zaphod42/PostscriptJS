@@ -70,7 +70,6 @@ BGProcess.Postscript.Viewer = function(element) {
            pages[current_page].style.display = "none";
            current_page += 1;
            pages[current_page].style.display = "block";
-           alert(pages[current_page].trace);
            position.innerHTML = current_page + 1 + "/" + pages.length;
        }
    };
@@ -80,7 +79,6 @@ BGProcess.Postscript.Viewer = function(element) {
        current_page = current_page > 0 ? current_page - 1 : pages.length - 1;
        pages[previous].style.display = "none";
        pages[current_page].style.display = "block";
-       alert(pages[current_page].trace);
        position.innerHTML = current_page + 1 + "/" + pages.length;
    };
 
