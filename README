@@ -1,0 +1,33 @@
+Experiment in Javascript and Postscript
+
+I wanted to learn a new language and for some odd reason decided on Postscript.
+Rather than just pick up a book and read about it I decided to implement a 
+Postscript interpreter. This program is the result of going through the
+Postscript Bluebook and implementing what it teaches page by page. The implementation 
+isn't complete, but many primitives are working and the structure that was evolving 
+should be obvious.
+
+For the implemenation I decided to also pick up a couple of things that I
+hadn't done (either never before or not for a while):
+
+   * Javascript without a supporting lib (no prototype, jQuery, or the like)
+   * HTML5 Canvas
+   * Jasmine test framework
+   * HTML5 Websockets
+   * The Mojolicious framework
+
+These components come together with the canvas and Javascript sans lib being
+used to implement the parser, interpreter, and renderer.  The server (server.pl) 
+for the Postscript viewer uses (a very small amount of) the Mojolicious framework.
+
+The test system is written with Jasmine, Mojolicious, and Websockets. The tests run
+by executing test.pl. The first thing that happens then is that a child process is
+forked to run the web server. Next another child is forked to run the browser (at
+the moment it only works on a Mac with Safari). The browser loads a generated HTML
+page from the server. This page simply loads in all of the Javascript needed to run
+the tests as well as the tests themselves.
+
+The test infrastructure then connects to the server using a Websocket and uses Jasmine
+to execute the tests. As the tests run the results are sent back to the server, which 
+reports them using TAP (so you can just use prove to run the test script and get a nice 
+test report). After all of the tests have finished the browser and server are shut down.
